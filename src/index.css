@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+
+:root {
+  /* Colors */
+  --orange-500: #FBB03B;
+  --orange-200: #FDDBA5;
+  --blue-900: #0F3A61;
+  --blue-600: #207CD3;
+  --blue-400: #4FA1ED;
+  --blue-50: #D4E7FA;
+  --gray-900: #1B2630;
+  --gray-600: #4D5A66;
+  --gray-300: #9DA8B2;
+  --gray-50: #EBEFF2;
+  --red-500: #E42E21;
+  --black: #000000;
+  --white: #FFFFFF;
+
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: var(--black);
+  background-color: var(--white);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--gray-50);
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+/* Typography */
+.h2 {
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.h3 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.h6 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.body1 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.body1-bold {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.body2 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.body2-bold {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.caption {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-50);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-600);
+}
