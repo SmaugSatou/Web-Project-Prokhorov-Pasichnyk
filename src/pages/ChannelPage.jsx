@@ -26,54 +26,11 @@ function ChannelPage() {
   }, [id])
 
   useEffect(() => {
-    if (descriptionRef.current && channel?.description) {
-      const checkIfClamped = () => {
-        const element = descriptionRef.current
-        if (!element) return
-
-        // Ensure element has width and is visible
-        if (element.offsetWidth === 0 || element.offsetHeight === 0) {
-          return
-        }
-
-        // Remove any inline styles first to ensure CSS classes control the display
-        element.style.display = ''
-        element.style.webkitLineClamp = ''
-        element.style.webkitBoxOrient = ''
-        element.style.overflow = ''
-
-        // Force a reflow to ensure styles are applied
-        void element.offsetHeight
-
-        // Now check if the element's content is overflowing
-        // When line-clamped, scrollHeight will be greater than clientHeight
-        const isClamped = element.scrollHeight > element.clientHeight + 1
-
-        setShowDescriptionToggle(isClamped)
-      }
-
-      // Run initial check immediately
-      checkIfClamped()
-
-      // Run check with delays to handle different rendering times
-      const timeout1 = setTimeout(checkIfClamped, 0)
-      const timeout2 = setTimeout(checkIfClamped, 100)
-      const timeout3 = setTimeout(checkIfClamped, 300)
-      const timeout4 = setTimeout(checkIfClamped, 600)
-
-      // Also check on resize
-      const resizeHandler = () => {
-        checkIfClamped()
-      }
-      window.addEventListener('resize', resizeHandler)
-
-      return () => {
-        clearTimeout(timeout1)
-        clearTimeout(timeout2)
-        clearTimeout(timeout3)
-        clearTimeout(timeout4)
-        window.removeEventListener('resize', resizeHandler)
-      }
+    if (channel?.description) {
+      // Simple check: if description has more than 200 characters OR has multiple line breaks, show toggle
+      const hasMultipleLines = channel.description.length > 200 || 
+                               (channel.description.match(/\n/g) || []).length >= 3
+      setShowDescriptionToggle(hasMultipleLines)
     }
   }, [channel])
 
