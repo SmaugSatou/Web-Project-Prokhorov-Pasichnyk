@@ -250,9 +250,12 @@
 }
 
 /* Limit height when collapsed and add gradient overlay */
-.channel-card-description.has-toggle:not(.expanded) {
-  max-height: 150px;
+.channel-card-description.has-toggle:not(.expanded) .description-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 11;
+  -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .channel-card-description.has-toggle:not(.expanded)::after {
@@ -264,11 +267,14 @@
   height: 50px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
   pointer-events: none;
+  z-index: 10;
 }
 
 /* Remove height restriction when expanded */
-.channel-card-description.expanded {
-  max-height: none;
+.channel-card-description.expanded .description-text {
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
   overflow: visible;
 }
 
@@ -1089,6 +1095,10 @@
 
   .channel-card-description .description-text {
     font-size: 17px;
+  }
+
+  .channel-card-description.has-toggle:not(.expanded) .description-text {
+    -webkit-line-clamp: 11;
   }
 
   .recommended-section {

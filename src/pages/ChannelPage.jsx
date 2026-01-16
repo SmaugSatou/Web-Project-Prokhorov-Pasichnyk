@@ -26,40 +26,54 @@ function ChannelPage() {
   }, [id])
 
   useEffect(() => {
-    if (descriptionRef.current && channel) {
-      // Use a timeout to ensure the element is fully rendered
-      setTimeout(() => {
+    if (descriptionRef.current && channel?.description) {
+      const checkIfClamped = () => {
         const element = descriptionRef.current
         if (!element) return
 
-        // Get the computed line-height
-        const computedStyle = window.getComputedStyle(element)
-        const lineHeight = parseFloat(computedStyle.lineHeight) || 16
-        const fontSize = parseFloat(computedStyle.fontSize) || 16
-        const effectiveLineHeight = lineHeight === 'normal' ? fontSize * 1.2 : lineHeight
+        // Ensure element has width and is visible
+        if (element.offsetWidth === 0 || element.offsetHeight === 0) {
+          return
+        }
 
-        // Count the number of lines by creating a temporary element
-        const tempDiv = document.createElement('div')
-        tempDiv.style.cssText = computedStyle.cssText
-        tempDiv.style.position = 'absolute'
-        tempDiv.style.visibility = 'hidden'
-        tempDiv.style.width = element.offsetWidth + 'px'
-        tempDiv.style.height = 'auto'
-        tempDiv.style.maxHeight = 'none'
-        tempDiv.style.whiteSpace = computedStyle.whiteSpace
-        tempDiv.textContent = channel.description
-        document.body.appendChild(tempDiv)
+        // Remove any inline styles first to ensure CSS classes control the display
+        element.style.display = ''
+        element.style.webkitLineClamp = ''
+        element.style.webkitBoxOrient = ''
+        element.style.overflow = ''
 
-        const contentHeight = tempDiv.scrollHeight
-        document.body.removeChild(tempDiv)
+        // Force a reflow to ensure styles are applied
+        void element.offsetHeight
 
-        // Calculate approximate number of lines
-        const numberOfLines = Math.ceil(contentHeight / effectiveLineHeight)
+        // Now check if the element's content is overflowing
+        // When line-clamped, scrollHeight will be greater than clientHeight
+        const isClamped = element.scrollHeight > element.clientHeight + 1
 
-        // Show toggle if content has more than 11 lines
-        const shouldShowToggle = numberOfLines > 11
-        setShowDescriptionToggle(shouldShowToggle)
-      }, 100)
+        setShowDescriptionToggle(isClamped)
+      }
+
+      // Run initial check immediately
+      checkIfClamped()
+
+      // Run check with delays to handle different rendering times
+      const timeout1 = setTimeout(checkIfClamped, 0)
+      const timeout2 = setTimeout(checkIfClamped, 100)
+      const timeout3 = setTimeout(checkIfClamped, 300)
+      const timeout4 = setTimeout(checkIfClamped, 600)
+
+      // Also check on resize
+      const resizeHandler = () => {
+        checkIfClamped()
+      }
+      window.addEventListener('resize', resizeHandler)
+
+      return () => {
+        clearTimeout(timeout1)
+        clearTimeout(timeout2)
+        clearTimeout(timeout3)
+        clearTimeout(timeout4)
+        window.removeEventListener('resize', resizeHandler)
+      }
     }
   }, [channel])
 
