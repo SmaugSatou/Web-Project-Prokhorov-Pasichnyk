@@ -40,7 +40,7 @@
 .user-avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;1.5
 }
 
 .user-info {
@@ -66,7 +66,7 @@
   height: 36px;
   border-radius: 8px;
   background: var(--white);
-  border: 1.5px solid var(--gray-300);
+  /* border: 1.5px solid var(--gray-300); */
   color: var(--gray-600);
   display: flex;
   align-items: center;
@@ -108,7 +108,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  background: var(--gray-50);
+  background: var(--blue-50);
   border-radius: 12px;
   text-decoration: none;
   color: var(--blue-900);
@@ -151,7 +151,8 @@
 
 .saved-channel-card {
   padding: 16px;
-  background: var(--gray-50);
+  background: var(--white);
+  border: 4px solid var(--blue-50);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -241,22 +242,24 @@
 .saved-channel-stats {
   display: flex;
   gap: 16px;
+  justify-content: center;
 }
 
 .stat-item-inline {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  align-items: center;
 }
 
 .stat-item-inline .stat-value {
-  font-size: 14px;
+  font-size: 21px;
   font-weight: 700;
   color: var(--blue-900);
 }
 
 .stat-item-inline .stat-label {
-  font-size: 11px;
+  font-size: 16.5px;
   color: var(--gray-600);
 }
 
@@ -272,9 +275,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 20px;
-  background: var(--gray-50);
-  border-radius: 12px;
 }
 
 .add-channel-form {
@@ -373,7 +373,8 @@
 
 .user-channel-card {
   padding: 16px;
-  background: var(--gray-50);
+  background: var(--white);
+  border: 4px solid var(--blue-50);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -416,6 +417,7 @@
 .user-channel-stats {
   display: flex;
   gap: 16px;
+  justify-content: center;
 }
 
 .user-channel-description {
@@ -432,7 +434,7 @@
   justify-content: space-between;
   padding: 16px;
   background: var(--white);
-  border: 1.5px solid var(--gray-300);
+  border: none;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
@@ -442,7 +444,6 @@
 }
 
 .logout-button:hover {
-  border-color: var(--red-500);
   color: var(--red-500);
 }
 
