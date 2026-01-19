@@ -15,8 +15,12 @@ function ProfilePage() {
   const user = {
     name: 'Бавовнятко',
     email: 'Bavovnyatko@gmail.com',
-    avatar: 'https://via.placeholder.com/80',
+    avatar: '/assets/profile_icons/my.png',
     youtubeConnected: true
+  }
+
+  const handleImageError = (e) => {
+    e.target.src = '/assets/channel_icons/default.png'
   }
 
   useEffect(() => {
@@ -64,7 +68,6 @@ function ProfilePage() {
   }
 
   const fetchUserChannels = async () => {
-    // Mock user-added channels
     setUserChannels([
       {
         id: 1,
@@ -110,7 +113,11 @@ function ProfilePage() {
           {/* User Profile Section */}
           <div className="user-profile-header">
             <div className="user-avatar">
-              <img src={user.avatar} alt={user.name} />
+              <img 
+                src={user.avatar} 
+                alt={user.name}
+                onError={handleImageError}
+              />
             </div>
             <div className="user-info">
               <h1 className="user-name">{user.name}</h1>
@@ -153,7 +160,12 @@ function ProfilePage() {
               {savedChannels.map(channel => (
                 <div key={channel.id} className="saved-channel-card">
                   <div className="saved-channel-header">
-                    <img src={channel.avatar} alt={channel.name} className="saved-channel-avatar" />
+                    <img 
+                      src={channel.avatar || '/assets/channel_icons/default.png'} 
+                      alt={channel.name} 
+                      className="saved-channel-avatar"
+                      onError={handleImageError}
+                    />
                     <div className="saved-channel-info">
                       <h3 className="saved-channel-name">{channel.name}</h3>
                       <p className="saved-channel-handle">{channel.handle}</p>
@@ -264,7 +276,12 @@ function ProfilePage() {
               {filteredUserChannels.map(channel => (
                 <div key={channel.id} className="user-channel-card">
                   <div className="user-channel-header">
-                    <img src={channel.avatar} alt={channel.name} className="user-channel-avatar" />
+                    <img 
+                      src={channel.avatar || '/assets/channel_icons/default.png'} 
+                      alt={channel.name} 
+                      className="user-channel-avatar"
+                      onError={handleImageError}
+                    />
                     <div className="user-channel-info">
                       <h3 className="user-channel-name">{channel.name}</h3>
                       <p className="user-channel-handle">{channel.handle}</p>

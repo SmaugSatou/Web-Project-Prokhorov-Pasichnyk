@@ -19,6 +19,10 @@ function ChannelPage() {
   const [showDescriptionToggle, setShowDescriptionToggle] = useState(false)
   const descriptionRef = React.useRef(null)
 
+  const handleImageError = (e) => {
+    e.target.src = '/assets/channel_icons/default.png'
+  }
+
   useEffect(() => {
     fetchChannelDetails()
     fetchSimilarChannels()
@@ -27,7 +31,6 @@ function ChannelPage() {
 
   useEffect(() => {
     if (channel?.description) {
-      // Simple check: if description has more than 200 characters OR has multiple line breaks, show toggle
       const hasMultipleLines = channel.description.length > 200 || 
                                (channel.description.match(/\n/g) || []).length >= 3
       setShowDescriptionToggle(hasMultipleLines)
@@ -78,7 +81,6 @@ function ChannelPage() {
 
   const toggleSave = () => {
     setIsSaved(!isSaved)
-    // Here you would also update the saved status in the backend
   }
 
   const handleRating = (rating) => {
@@ -143,7 +145,11 @@ function ChannelPage() {
           {/* Main Channel Card */}
           <div className="main-channel-card">
             <div className="channel-card-avatar">
-              <img src={channel.avatar} alt={channel.name} />
+              <img 
+                src={channel.avatar || '/assets/channel_icons/default.png'} 
+                alt={channel.name}
+                onError={handleImageError}
+              />
             </div>
 
             <button
@@ -289,7 +295,11 @@ function ChannelPage() {
               {comments.map(comment => (
                 <div key={comment.id} className="comment-item">
                   <div className="comment-avatar">
-                    <img src={comment.avatar} alt={comment.author} />
+                    <img 
+                      src={comment.avatar || '/assets/profile_icons/my.png'} 
+                      alt={comment.author}
+                      onError={handleImageError}
+                    />
                   </div>
                   <div className="comment-bubble">
                     <div className="comment-bubble-arrow"></div>
@@ -326,7 +336,11 @@ function ChannelPage() {
                     onClick={() => navigate(`/channel/${similarChannel.id}`)}
                   >
                     <div className="similar-card-avatar">
-                      <img src={similarChannel.avatar} alt={similarChannel.name} />
+                      <img 
+                        src={similarChannel.avatar || '/assets/channel_icons/default.png'} 
+                        alt={similarChannel.name}
+                        onError={handleImageError}
+                      />
                     </div>
 
                     <div className="similar-card-header">

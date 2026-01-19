@@ -21,7 +21,6 @@ function AIChat({ isOpen, onClose }) {
   const handleSend = () => {
     if (!message.trim()) return
 
-    // Add user message
     const newMessages = [...messages, {
       id: messages.length + 1,
       type: 'user',
@@ -31,7 +30,6 @@ function AIChat({ isOpen, onClose }) {
     setMessages(newMessages)
     setMessage('')
 
-    // Simulate AI response
     setTimeout(() => {
       setMessages([...newMessages, {
         id: newMessages.length + 1,

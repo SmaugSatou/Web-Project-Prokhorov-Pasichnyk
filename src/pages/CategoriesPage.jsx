@@ -70,7 +70,6 @@ function CategoriesPage() {
   }, [searchQuery, activeFilter])
 
   const handleCategoryClick = (categoryName) => {
-    // Navigate to channels list with category filter
     navigate(`/channels?category=${encodeURIComponent(categoryName)}`)
   }
 

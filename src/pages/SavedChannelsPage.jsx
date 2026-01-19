@@ -22,7 +22,6 @@ function SavedChannelsPage() {
       setSavedChannels(data)
     } catch (error) {
       console.error('Error fetching saved channels:', error)
-      // Mock data for demonstration
       setSavedChannels([
         {
           id: 1,

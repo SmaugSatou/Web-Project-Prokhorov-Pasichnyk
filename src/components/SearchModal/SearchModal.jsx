@@ -6,6 +6,10 @@ function SearchModal({ isOpen, onClose }) {
   const [searchResults, setSearchResults] = useState([])
   const [isSearching, setIsSearching] = useState(false)
 
+  const handleImageError = (e) => {
+    e.target.src = '/assets/channel_icons/default.png'
+  }
+
   const handleSearch = async (query) => {
     if (!query.trim()) {
       setSearchResults([])
@@ -15,7 +19,6 @@ function SearchModal({ isOpen, onClose }) {
     setIsSearching(true)
 
     try {
-      // Search in channels
       const response = await fetch('http://localhost:3000/channels')
       const channels = await response.json()
 
@@ -117,9 +120,16 @@ function SearchModal({ isOpen, onClose }) {
                   >
                     <div className="search-result-avatar">
                       {channel.avatar ? (
-                        <img src={channel.avatar} alt={channel.name} />
+                        <img 
+                          src={channel.avatar} 
+                          alt={channel.name}
+                          onError={handleImageError}
+                        />
                       ) : (
-                        <div className="avatar-placeholder"></div>
+                        <img 
+                          src="/assets/channel_icons/default.png" 
+                          alt={channel.name}
+                        />
                       )}
                     </div>
                     <div className="search-result-info">

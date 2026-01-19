@@ -12,7 +12,6 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
     const pages = []
     const maxVisiblePages = 3
 
-    // Always show first page
     if (currentPage > 1) {
       pages.push(
         <button
@@ -31,7 +30,6 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       )
     }
 
-    // Show middle pages
     for (let i = 2; i <= Math.min(maxVisiblePages, totalPages); i++) {
       pages.push(
         <button

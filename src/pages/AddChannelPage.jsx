@@ -30,7 +30,6 @@ function AddChannelPage() {
     setSubmitStatus(null)
 
     try {
-      // API call to submit channel
       const response = await fetch('http://localhost:3000/channels', {
         method: 'POST',
         headers: {

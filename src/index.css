@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
 
 :root {
-  /* Colors */
   --orange-500: #FBB03B;
   --orange-200: #FDDBA5;
   --blue-900: #0F3A61;
@@ -60,7 +59,6 @@ input, textarea {
   font-family: inherit;
 }
 
-/* Typography */
 .h2 {
   font-size: 25px;
   font-weight: 600;
@@ -109,7 +107,6 @@ input, textarea {
   line-height: 1;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }

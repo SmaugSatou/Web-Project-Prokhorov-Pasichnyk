@@ -14,6 +14,10 @@ function ChannelCard({ channel, variant = 'compact' }) {
     navigate(`/channel/${channel.id}`)
   }
 
+  const handleImageError = (e) => {
+    e.target.src = '/assets/channel_icons/default.png'
+  }
+
   const renderStars = (rating) => {
     return (
       <div className="rating-stars">
@@ -25,7 +29,6 @@ function ChannelCard({ channel, variant = 'compact' }) {
     )
   }
 
-  // List variant for ChannelsListPage (matches Figma design)
   if (variant === 'list') {
     return (
       <div
@@ -33,7 +36,11 @@ function ChannelCard({ channel, variant = 'compact' }) {
         onClick={handleCardClick}
       >
         <div className="channel-avatar">
-          <img src={channel.avatar || 'https://via.placeholder.com/120'} alt={channel.name} />
+          <img 
+            src={channel.avatar || '/assets/channel_icons/default.png'} 
+            alt={channel.name}
+            onError={handleImageError}
+          />
         </div>
 
         <div className="channel-header">
@@ -87,7 +94,11 @@ function ChannelCard({ channel, variant = 'compact' }) {
       onClick={handleCardClick}
     >
       <div className="channel-avatar">
-        <img src={channel.avatar || 'https://via.placeholder.com/120'} alt={channel.name} />
+        <img 
+          src={channel.avatar || '/assets/channel_icons/default.png'} 
+          alt={channel.name}
+          onError={handleImageError}
+        />
       </div>
 
       <div className="channel-header">

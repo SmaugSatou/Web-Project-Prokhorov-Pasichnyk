@@ -17,7 +17,6 @@ function HomePage() {
   const [showAllChannels, setShowAllChannels] = useState(false)
 
   useEffect(() => {
-    // Fetch channels from API
     fetchChannels()
     fetchSavedCount()
   }, [])
@@ -29,12 +28,11 @@ function HomePage() {
       setSavedCount(data.length)
     } catch (error) {
       console.error('Error fetching saved count:', error)
-      setSavedCount(3) // fallback
+      setSavedCount(3)
     }
   }
 
   useEffect(() => {
-    // Filter channels when filter or category changes
     filterChannels()
   }, [filter, allChannels, selectedCategory])
 
@@ -45,7 +43,6 @@ function HomePage() {
       setAllChannels(data)
     } catch (error) {
       console.error('Error fetching channels:', error)
-      // Use mock data for now
       const mockData = getMockChannels()
       setAllChannels(mockData)
     }
@@ -54,11 +51,9 @@ function HomePage() {
   const filterChannels = () => {
     let filtered = [...allChannels]
 
-    // Apply category filter first
     if (selectedCategory) {
       filtered = filtered.filter(channel => {
         if (!channel.category) return false
-        // Split category string by comma and check if any match
         const categories = channel.category.split(',').map(cat => cat.trim())
         return categories.some(cat =>
           cat.toLowerCase() === selectedCategory.toLowerCase()
@@ -66,15 +61,11 @@ function HomePage() {
       })
     }
 
-    // Then apply sort filter
     if (filter === 'new') {
-      // Sort by newest (reverse order for demo)
       filtered = filtered.reverse()
     } else if (filter === 'top') {
-      // Sort by rating
       filtered = filtered.sort((a, b) => b.rating - a.rating)
     } else {
-      // Recommendations - keep original order
       filtered = [...filtered]
     }
 
@@ -82,7 +73,6 @@ function HomePage() {
   }
 
   const handleCategoryClick = (categoryLabel) => {
-    // Map category labels to search terms
     const categoryMap = {
       'Англійська мова': 'Англійська мова',
       'Ігрові світи та лор': 'Ігри',
@@ -104,7 +94,6 @@ function HomePage() {
 
     const searchTerm = categoryMap[categoryLabel]
     if (selectedCategory === searchTerm) {
-      // Deselect if clicking same category
       setSelectedCategory(null)
     } else {
       setSelectedCategory(searchTerm)

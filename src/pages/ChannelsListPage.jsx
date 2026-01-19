@@ -64,7 +64,6 @@ function ChannelsListPage() {
   const filterAndSortChannels = () => {
     let filtered = [...allChannels]
 
-    // Apply category filter if present
     if (categoryParam) {
       filtered = filtered.filter(channel => {
         if (!channel.category) return false
@@ -75,7 +74,6 @@ function ChannelsListPage() {
       })
     }
 
-    // Apply search filter
     if (searchQuery) {
       filtered = filtered.filter(channel =>
         channel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -83,7 +81,6 @@ function ChannelsListPage() {
       )
     }
 
-    // Apply sorting
     if (activeSort === 'subscribers') {
       filtered.sort((a, b) => {
         const aNum = parseFloat(a.subscribers.replace(/[^0-9.]/g, ''))
@@ -107,10 +104,8 @@ function ChannelsListPage() {
 
   const handleSortClick = (sortType) => {
     if (activeSort === sortType) {
-      // Toggle direction if clicking same sort
       setSortDirection(sortDirection === 'desc' ? 'asc' : 'desc')
     } else {
-      // Set new sort type with descending direction
       setActiveSort(sortType)
       setSortDirection('desc')
     }
