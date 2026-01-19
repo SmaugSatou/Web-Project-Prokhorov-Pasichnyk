@@ -87,6 +87,10 @@ function ProfilePage() {
     setSavedChannels(savedChannels.filter(ch => ch.id !== channelId))
   }
 
+  const handleChannelClick = (channelId) => {
+    navigate(`/channel/${channelId}`)
+  }
+
   const handleSubmitChannel = (e) => {
     e.preventDefault()
     if (!channelName.trim() || !channelUrl.trim()) return
@@ -158,7 +162,12 @@ function ProfilePage() {
             <h2 className="section-title">Збережені канали</h2>
             <div className="saved-channels-list">
               {savedChannels.map(channel => (
-                <div key={channel.id} className="saved-channel-card">
+                <div 
+                  key={channel.id} 
+                  className="saved-channel-card"
+                  onClick={() => handleChannelClick(channel.id)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <div className="saved-channel-header">
                     <img 
                       src={channel.avatar || '/assets/channel_icons/default.png'} 
@@ -172,7 +181,10 @@ function ProfilePage() {
                     </div>
                     <button
                       className="bookmark-icon-button active"
-                      onClick={() => handleRemoveChannel(channel.id)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleRemoveChannel(channel.id)
+                      }}
                       aria-label="Видалити зі збережених"
                     >
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
