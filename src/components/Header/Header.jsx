@@ -40,7 +40,15 @@ function Header() {
           </div>
           <div className="header-right">
             <Link to="/profile" className="user-avatar">
-              <div className="avatar-placeholder"></div>
+              <img 
+                src="/assets/profile_icons/my.png" 
+                alt="Profile"
+                onError={(e) => {
+                  e.target.style.display = 'none'
+                  e.target.nextElementSibling.style.display = 'block'
+                }}
+              />
+              <div className="avatar-placeholder" style={{ display: 'none' }}></div>
             </Link>
             <button
               className="menu-button"
