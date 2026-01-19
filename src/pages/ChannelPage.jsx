@@ -328,7 +328,30 @@ function ChannelPage() {
           <div className="similar-section">
             <h2 className="section-title">Подібні канали</h2>
             <div className="similar-carousel">
-              <div className="similar-scroll-container" style={{ transform: `translateX(-${currentSlide * 360}px)` }}>
+              {similarChannels.length > 1 && currentSlide > 0 && (
+                <button 
+                  className="carousel-arrow carousel-arrow-left"
+                  onClick={() => setCurrentSlide(currentSlide - 1)}
+                  aria-label="Попередній канал"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              )}
+              {similarChannels.length > 1 && currentSlide < similarChannels.length - 1 && (
+                <button 
+                  className="carousel-arrow carousel-arrow-right"
+                  onClick={() => setCurrentSlide(currentSlide + 1)}
+                  aria-label="Наступний канал"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              )}
+              <div className="similar-scroll-wrapper">
+                <div className="similar-scroll-container" style={{ transform: `translateX(calc(-${currentSlide} * (100% + 8px)))` }}>
                 {similarChannels.map(similarChannel => (
                   <div
                     key={similarChannel.id}
@@ -383,6 +406,7 @@ function ChannelPage() {
                   </div>
                 ))}
               </div>
+            </div>
               <div className="carousel-dots">
                 {similarChannels.map((_, index) => (
                   <button

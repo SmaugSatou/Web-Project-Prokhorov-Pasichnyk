@@ -15,6 +15,7 @@
   flex-direction: column;
   gap: 44px;
   padding-bottom: 44px;
+  overflow: visible;
 }
 
 .loading,
@@ -48,6 +49,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 0;
+  overflow: visible;
 }
 
 /* Main Channel Card */
@@ -326,13 +328,6 @@
   gap: 24px;
 }
 
-  font-family: 'Fixel Text', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: normal;
-  color: #0F3A61;
-  margin: 0;
-}
 
 .video-scroll-container {
   display: flex;
@@ -701,20 +696,65 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
 }
 
 .similar-carousel {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
+  padding-top: 0;
+  margin-top: 20px;
+  position: relative;
+}
+
+.similar-scroll-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: #FFFFFF;
+  border: 2px solid #207CD3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  color: #207CD3;
+  transition: all 0.2s;
+}
+
+.carousel-arrow:hover {
+  background: #207CD3;
+  color: #FFFFFF;
+}
+
+.carousel-arrow-left {
+  left: -20px;
+}
+
+.carousel-arrow-right {
+  right: -20px;
 }
 
 .similar-scroll-container {
   display: flex;
   gap: 8px;
   transition: transform 0.3s ease;
+  overflow: visible;
+  width: 100%;
 }
 
 .similar-channel-card {
@@ -724,12 +764,15 @@
   border: 4px solid #D4E7FA;
   border-radius: 10px;
   padding: 12px;
+  padding-top: 26px;
   display: flex;
   flex-direction: column;
   position: relative;
   min-height: 260px;
   cursor: pointer;
   transition: transform 0.2s;
+  overflow: visible;
+  margin-top: 20px;
 }
 
 .similar-channel-card:hover {
@@ -747,6 +790,8 @@
   border-radius: 132px;
   overflow: hidden;
   background: #FFFFFF;
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .similar-card-avatar img {
