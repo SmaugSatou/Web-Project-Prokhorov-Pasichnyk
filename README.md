@@ -32,7 +32,7 @@ The Add Channel page has a form for adding new channels. Form state uses useStat
 
 ### User Interaction
 
-The application has several interactive features. Search lets users filter channels by name or category. Users can save favorite channels for later. AI Chat gives channel recommendations based on user input. Pagination helps browse through channel lists. Category filters help find channels by interests. Hover effects and clickable cards give visual feedback.
+The application has several interactive features. Search lets users filter channels by name or category. Users can save favorite channels for later. AI Chat gives channel recommendations based on user input(Right now implemented only fronted, which says user that prompt is being processed and do nothing). Pagination helps browse through channel lists. Category filters help find channels by interests. Hover effects and clickable cards give visual feedback.
 
 ### Working with API
 
