@@ -43,8 +43,7 @@ function HomePage() {
       setAllChannels(data)
     } catch (error) {
       console.error('Error fetching channels:', error)
-      const mockData = getMockChannels()
-      setAllChannels(mockData)
+      setAllChannels([])
     }
   }
 

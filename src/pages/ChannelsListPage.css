@@ -10,10 +10,10 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 16px 12px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .breadcrumb {
@@ -31,17 +31,28 @@
   margin: 0 0 0 0;
 }
 
+.breadcrumb a {
+  color: var(--blue-600);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--blue-700);
+  text-decoration: underline;
+}
+
 .page-header {
-  padding: 0 8px;
+  padding: 0 4px;
 }
 
 .page-title {
   font-family: 'Fixel Text', sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--blue-900);
   margin: 0;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .search-filter-row {
@@ -97,25 +108,25 @@
 
 .sort-buttons {
   display: flex;
-  gap: 10px;
-  padding: 0 6px;
+  gap: 8px;
+  padding: 0 4px;
   flex-wrap: wrap;
 }
 
 .sort-btn {
   height: 35px;
-  padding: 4px 14px 4px 18px;
+  padding: 4px 12px 4px 14px;
   border: 2px solid var(--blue-600);
   border-radius: 100px;
   font-family: 'Fixel Text', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--blue-600);
   background: var(--white);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   transition: all 0.2s;
   white-space: nowrap;
 }
@@ -144,7 +155,7 @@
 .channels-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 16px;
   padding: 0;
 }
 
@@ -174,22 +185,71 @@
 
 @media (max-width: 768px) {
   .channels-list-content {
-    padding: 16px;
+    padding: 12px 8px;
+    gap: 12px;
   }
 
-  .channels-list-container {
-    padding: 24px 16px;
+  .page-header {
+    padding: 0 4px;
   }
 
-  .channels-list-title {
-    font-size: 24px;
+  .page-title {
+    font-size: 18px;
   }
 
-  .controls-row {
-    flex-wrap: wrap;
+  .search-filter-row {
+    gap: 12px;
   }
 
   .search-box {
-    min-width: 100%;
+    height: 38px;
+  }
+
+  .search-box input {
+    font-size: 13px;
+  }
+
+  .sort-buttons {
+    gap: 6px;
+    padding: 0 4px;
+  }
+
+  .sort-btn {
+    height: 32px;
+    padding: 4px 10px 4px 12px;
+    font-size: 12px;
+    gap: 3px;
+  }
+
+  .sort-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .channels-grid {
+    gap: 12px;
+  }
+
+  .empty-state {
+    padding: 32px 12px;
+  }
+
+  .empty-state p {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .channels-list-content {
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .channels-grid {
+    gap: 24px;
   }
 }

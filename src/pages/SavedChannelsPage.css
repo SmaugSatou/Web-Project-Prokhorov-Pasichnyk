@@ -30,6 +30,17 @@
   font-family: 'Fixel Text', sans-serif;
 }
 
+.breadcrumb a {
+  color: var(--blue-600);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--blue-700);
+  text-decoration: underline;
+}
+
 .saved-title {
   font-size: 22px;
   font-weight: 700;
@@ -130,7 +141,6 @@
   transform: translateY(-2px);
 }
 
-/* Grid for channel cards */
 .saved-channels-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -150,7 +160,6 @@
   }
 }
 
-/* Responsive adjustments */
 @media (min-width: 768px) {
   .saved-content {
     max-width: 900px;

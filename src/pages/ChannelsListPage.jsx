@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, Link } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import ChannelCard from '../components/ChannelCard/ChannelCard'
 import Pagination from '../components/Pagination/Pagination'
+import AIChat from '../components/AIChat/AIChat'
 import './ChannelsListPage.css'
 
 function ChannelsListPage() {
@@ -17,6 +18,7 @@ function ChannelsListPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [showFilterMenu, setShowFilterMenu] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [aiChatOpen, setAiChatOpen] = useState(false)
   const itemsPerPage = 15
 
   useEffect(() => {
@@ -34,31 +36,8 @@ function ChannelsListPage() {
       setAllChannels(data)
     } catch (error) {
       console.error('Error fetching channels:', error)
-      setAllChannels(getMockChannels())
+      setAllChannels([])
     }
-  }
-
-  const getMockChannels = () => {
-    return [
-      {
-        id: '1',
-        name: 'Melior Max',
-        category: 'Ігри, Летсплеї',
-        subscribers: '45,1 тис.',
-        videos: '957',
-        rating: 4.8,
-        avatar: 'https://via.placeholder.com/120'
-      },
-      {
-        id: '2',
-        name: 'thetremba',
-        category: 'Ігри, Летсплеї',
-        subscribers: '116 тис.',
-        videos: '455',
-        rating: 4.9,
-        avatar: 'https://via.placeholder.com/120'
-      }
-    ]
   }
 
   const filterAndSortChannels = () => {
@@ -83,19 +62,30 @@ function ChannelsListPage() {
 
     if (activeSort === 'subscribers') {
       filtered.sort((a, b) => {
-        const aNum = parseFloat(a.subscribers.replace(/[^0-9.]/g, ''))
-        const bNum = parseFloat(b.subscribers.replace(/[^0-9.]/g, ''))
+        // Extract number and handle "тис." (thousands), "млн" (millions)
+        const parseSubscribers = (str) => {
+          if (!str) return 0
+          const numStr = str.replace(/[^0-9.,]/g, '').replace(',', '.')
+          const num = parseFloat(numStr) || 0
+          if (str.includes('млн')) return num * 1000000
+          if (str.includes('тис')) return num * 1000
+          return num
+        }
+        const aNum = parseSubscribers(a.subscribers)
+        const bNum = parseSubscribers(b.subscribers)
         return sortDirection === 'desc' ? bNum - aNum : aNum - bNum
       })
     } else if (activeSort === 'videos') {
       filtered.sort((a, b) => {
-        const aNum = parseInt(a.videos)
-        const bNum = parseInt(b.videos)
+        const aNum = parseInt(a.videos?.toString().replace(/[^0-9]/g, '') || '0')
+        const bNum = parseInt(b.videos?.toString().replace(/[^0-9]/g, '') || '0')
         return sortDirection === 'desc' ? bNum - aNum : aNum - bNum
       })
     } else if (activeSort === 'rating') {
       filtered.sort((a, b) => {
-        return sortDirection === 'desc' ? b.rating - a.rating : a.rating - b.rating
+        const aRating = parseFloat(a.rating) || 0
+        const bRating = parseFloat(b.rating) || 0
+        return sortDirection === 'desc' ? bRating - aRating : aRating - bRating
       })
     }
 
@@ -125,7 +115,7 @@ function ChannelsListPage() {
 
       <main className="channels-list-content">
         <div className="breadcrumb">
-          Головна / Канали
+          <Link to="/">Головна</Link> / Канали
         </div>
 
         <div className="page-header">
@@ -210,6 +200,20 @@ function ChannelsListPage() {
       </main>
 
       <Footer />
+
+      {/* AI Chat Helper Button */}
+      <button className="ai-helper-btn" aria-label="AI помічник" onClick={() => setAiChatOpen(true)}>
+        <div className="helper-tooltip">
+          <span>Маєш проблеми з пошуком?</span>
+        </div>
+        <div className="helper-icon">
+          <svg width="37" height="37" viewBox="0 0 37 37" fill="none">
+            <path d="M18.5 3.5L22.5 11.5L31 13.5L24.5 19.5L26.5 28L18.5 23.5L10.5 28L12.5 19.5L6 13.5L14.5 11.5L18.5 3.5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </button>
+
+      <AIChat isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import ChannelCard from '../components/ChannelCard/ChannelCard'
+import AIChat from '../components/AIChat/AIChat'
 import './SavedChannelsPage.css'
 
 function SavedChannelsPage() {
@@ -10,6 +11,7 @@ function SavedChannelsPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [activeFilter, setActiveFilter] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const [aiChatOpen, setAiChatOpen] = useState(false)
 
   useEffect(() => {
     fetchSavedChannels()
@@ -98,7 +100,7 @@ function SavedChannelsPage() {
       <main className="saved-content">
         <div className="saved-container">
           <div className="breadcrumb">
-            Головна / Збережені
+            <Link to="/">Головна</Link> / Збережені
           </div>
 
           <h1 className="saved-title">Список збережених україномовних ютуб-каналів</h1>
@@ -145,6 +147,19 @@ function SavedChannelsPage() {
       </main>
 
       <Footer />
+
+      <button className="ai-helper-btn" aria-label="AI помічник" onClick={() => setAiChatOpen(true)}>
+        <div className="helper-tooltip">
+          <span>Маєш проблеми з пошуком?</span>
+        </div>
+        <div className="helper-icon">
+          <svg width="37" height="37" viewBox="0 0 37 37" fill="none">
+            <path d="M18.5 3.5L22.5 11.5L31 13.5L24.5 19.5L26.5 28L18.5 23.5L10.5 28L12.5 19.5L6 13.5L14.5 11.5L18.5 3.5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </button>
+
+      <AIChat isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} />
     </div>
   )
 }

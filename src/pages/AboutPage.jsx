@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import './AboutPage.css'
@@ -50,7 +51,7 @@ function AboutPage() {
       <main className="about-content">
         <div className="about-container">
           <div className="breadcrumb">
-            Головна / Про проєкт
+            <Link to="/">Головна</Link> / Про проєкт
           </div>
 
           <section className="about-section">
@@ -145,18 +146,6 @@ function AboutPage() {
             </form>
           </section>
         </div>
-
-        {/* AI Chat Helper Button */}
-        <button className="ai-helper-btn" aria-label="AI помічник">
-          <div className="helper-tooltip">
-            <span>Маєш проблеми з пошуком?</span>
-          </div>
-          <div className="helper-icon">
-            <svg width="37" height="37" viewBox="0 0 37 37" fill="none">
-              <path d="M18.5 3.5L22.5 11.5L31 13.5L24.5 19.5L26.5 28L18.5 23.5L10.5 28L12.5 19.5L6 13.5L14.5 11.5L18.5 3.5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-        </button>
       </main>
 
       <Footer />

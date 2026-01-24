@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
+import AIChat from '../components/AIChat/AIChat'
 import './ChannelPage.css'
 
 function ChannelPage() {
@@ -17,6 +18,7 @@ function ChannelPage() {
   const [similarChannels, setSimilarChannels] = useState([])
   const [currentSlide, setCurrentSlide] = useState(0)
   const [showDescriptionToggle, setShowDescriptionToggle] = useState(false)
+  const [aiChatOpen, setAiChatOpen] = useState(false)
   const descriptionRef = React.useRef(null)
 
   const handleImageError = (e) => {
@@ -31,7 +33,7 @@ function ChannelPage() {
 
   useEffect(() => {
     if (channel?.description) {
-      const hasMultipleLines = channel.description.length > 200 || 
+      const hasMultipleLines = channel.description.length > 200 ||
                                (channel.description.match(/\n/g) || []).length >= 3
       setShowDescriptionToggle(hasMultipleLines)
     }
@@ -138,15 +140,15 @@ function ChannelPage() {
       <main className="channel-content">
         {/* Breadcrumb */}
         <div className="breadcrumb">
-          Головна / Добірки / Летсплеї / {channel.name}
+          <Link to="/">Головна</Link> / <Link to="/categories">Добірки</Link> / Летсплеї / {channel.name}
         </div>
 
         <div className="channel-container">
           {/* Main Channel Card */}
           <div className="main-channel-card">
             <div className="channel-card-avatar">
-              <img 
-                src={channel.avatar || '/assets/channel_icons/default.png'} 
+              <img
+                src={channel.avatar || '/assets/channel_icons/default.png'}
                 alt={channel.name}
                 onError={handleImageError}
               />
@@ -295,8 +297,8 @@ function ChannelPage() {
               {comments.map(comment => (
                 <div key={comment.id} className="comment-item">
                   <div className="comment-avatar">
-                    <img 
-                      src={comment.avatar || '/assets/profile_icons/my.png'} 
+                    <img
+                      src={comment.avatar || '/assets/profile_icons/my.png'}
                       alt={comment.author}
                       onError={handleImageError}
                     />
@@ -329,7 +331,7 @@ function ChannelPage() {
             <h2 className="section-title">Подібні канали</h2>
             <div className="similar-carousel">
               {similarChannels.length > 1 && currentSlide > 0 && (
-                <button 
+                <button
                   className="carousel-arrow carousel-arrow-left"
                   onClick={() => setCurrentSlide(currentSlide - 1)}
                   aria-label="Попередній канал"
@@ -340,7 +342,7 @@ function ChannelPage() {
                 </button>
               )}
               {similarChannels.length > 1 && currentSlide < similarChannels.length - 1 && (
-                <button 
+                <button
                   className="carousel-arrow carousel-arrow-right"
                   onClick={() => setCurrentSlide(currentSlide + 1)}
                   aria-label="Наступний канал"
@@ -359,8 +361,8 @@ function ChannelPage() {
                     onClick={() => navigate(`/channel/${similarChannel.id}`)}
                   >
                     <div className="similar-card-avatar">
-                      <img 
-                        src={similarChannel.avatar || '/assets/channel_icons/default.png'} 
+                      <img
+                        src={similarChannel.avatar || '/assets/channel_icons/default.png'}
                         alt={similarChannel.name}
                         onError={handleImageError}
                       />
@@ -422,6 +424,20 @@ function ChannelPage() {
       </main>
 
       <Footer />
+
+      {/* AI Chat Helper Button */}
+      <button className="ai-helper-btn" aria-label="AI помічник" onClick={() => setAiChatOpen(true)}>
+        <div className="helper-tooltip">
+          <span>Маєш проблеми з пошуком?</span>
+        </div>
+        <div className="helper-icon">
+          <svg width="37" height="37" viewBox="0 0 37 37" fill="none">
+            <path d="M18.5 3.5L22.5 11.5L31 13.5L24.5 19.5L26.5 28L18.5 23.5L10.5 28L12.5 19.5L6 13.5L14.5 11.5L18.5 3.5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </button>
+
+      <AIChat isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} />
     </div>
   )
 }

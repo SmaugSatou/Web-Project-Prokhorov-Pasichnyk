@@ -63,6 +63,17 @@
   margin-bottom: -5px;
 }
 
+.breadcrumb a {
+  color: var(--blue-600);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--blue-700);
+  text-decoration: underline;
+}
+
 .about-section {
   display: flex;
   flex-direction: column;
@@ -228,7 +239,7 @@
 
 .faq-question span {
   flex: 1;
-  line-height: 1;
+  line-height: 1.4;
 }
 
 .chevron {
@@ -351,66 +362,6 @@
   cursor: not-allowed;
 }
 
-/* AI Helper Button */
-.ai-helper-btn {
-  position: fixed;
-  bottom: 32px;
-  right: 17px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 100;
-  padding: 0;
-}
-
-.helper-tooltip {
-  background: var(--orange-200);
-  padding: 8px 12px;
-  border-radius: 30px;
-  box-shadow: 0px 12px 16px -4px rgba(150, 92, 0, 0.08), 0px 4px 6px -2px rgba(40, 31, 16, 0.03);
-  position: relative;
-}
-
-.helper-tooltip::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  right: 22px;
-  width: 12px;
-  height: 12px;
-  background: var(--orange-200);
-  transform: rotate(45deg);
-  border-bottom-right-radius: 2px;
-}
-
-.helper-tooltip span {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--black);
-  font-family: 'Fixel Text', sans-serif;
-  white-space: nowrap;
-  line-height: 18px;
-}
-
-.helper-icon {
-  width: 70px;
-  height: 70px;
-  background: var(--orange-500);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s;
-}
-
-.ai-helper-btn:hover .helper-icon {
-  transform: scale(1.05);
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -431,27 +382,6 @@
   .about-text,
   .faq-list {
     width: 100%;
-  }
-
-  .ai-helper-btn {
-    right: 12px;
-    bottom: 24px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ai-helper-btn {
-    right: 48px;
-    bottom: 48px;
-  }
-
-  .helper-icon {
-    width: 80px;
-    height: 80px;
-  }
-
-  .helper-tooltip span {
-    font-size: 15px;
   }
 }
 
@@ -496,6 +426,7 @@
   line-height: 1.6;
   color: var(--gray-700);
   margin: 0;
+  padding-top: 1rem;
 }
 
 .feedback-section {

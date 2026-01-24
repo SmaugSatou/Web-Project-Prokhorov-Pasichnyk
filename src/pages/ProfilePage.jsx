@@ -117,8 +117,8 @@ function ProfilePage() {
           {/* User Profile Section */}
           <div className="user-profile-header">
             <div className="user-avatar">
-              <img 
-                src={user.avatar} 
+              <img
+                src={user.avatar}
                 alt={user.name}
                 onError={handleImageError}
               />
@@ -162,16 +162,16 @@ function ProfilePage() {
             <h2 className="section-title">Збережені канали</h2>
             <div className="saved-channels-list">
               {savedChannels.map(channel => (
-                <div 
-                  key={channel.id} 
+                <div
+                  key={channel.id}
                   className="saved-channel-card"
                   onClick={() => handleChannelClick(channel.id)}
                   style={{ cursor: 'pointer' }}
                 >
                   <div className="saved-channel-header">
-                    <img 
-                      src={channel.avatar || '/assets/channel_icons/default.png'} 
-                      alt={channel.name} 
+                    <img
+                      src={channel.avatar || '/assets/channel_icons/default.png'}
+                      alt={channel.name}
                       className="saved-channel-avatar"
                       onError={handleImageError}
                     />
@@ -286,11 +286,15 @@ function ProfilePage() {
             </div>
             <div className="user-channels-list">
               {filteredUserChannels.map(channel => (
-                <div key={channel.id} className="user-channel-card">
+                <div
+                  key={channel.id}
+                  className="user-channel-card"
+                  onClick={() => handleChannelClick(channel.id)}
+                >
                   <div className="user-channel-header">
-                    <img 
-                      src={channel.avatar || '/assets/channel_icons/default.png'} 
-                      alt={channel.name} 
+                    <img
+                      src={channel.avatar || '/assets/channel_icons/default.png'}
+                      alt={channel.name}
                       className="user-channel-avatar"
                       onError={handleImageError}
                     />
@@ -303,6 +307,7 @@ function ProfilePage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="youtube-icon-link"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M19.582 5.155a2.513 2.513 0 0 0-1.768-1.778C16.254 2.954 10 2.954 10 2.954s-6.254 0-7.814.42a2.513 2.513 0 0 0-1.768 1.778C0 6.725 0 10 0 10s0 3.275.418 4.845a2.513 2.513 0 0 0 1.768 1.778c1.56.42 7.814.42 7.814.42s6.254 0 7.814-.42a2.513 2.513 0 0 0 1.768-1.778C20 13.275 20 10 20 10s0-3.275-.418-4.845zM7.955 12.973V7.027L13.182 10l-5.227 2.973z"/>

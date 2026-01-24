@@ -27,7 +27,6 @@
   color: #9DA8B2;
 }
 
-/* Breadcrumb */
 .breadcrumb {
   background: #FFFFFF;
   height: 18px;
@@ -44,6 +43,17 @@
   width: fit-content;
 }
 
+.breadcrumb a {
+  color: var(--blue-600);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--blue-700);
+  text-decoration: underline;
+}
+
 .channel-container {
   display: flex;
   flex-direction: column;
@@ -52,7 +62,6 @@
   overflow: visible;
 }
 
-/* Main Channel Card */
 .main-channel-card {
   background: #FFFFFF;
   border-radius: 10px;
@@ -240,18 +249,15 @@
   text-align: center;
 }
 
-/* Channel Description - Main Card */
 .channel-card-description {
   margin-top: 16px;
   position: relative;
 }
 
-/* Add padding for toggle button when needed */
 .channel-card-description.has-toggle {
   padding-bottom: 40px;
 }
 
-/* Limit height when collapsed and add gradient overlay */
 .channel-card-description.has-toggle:not(.expanded) .description-text {
   display: -webkit-box;
   -webkit-line-clamp: 11;
@@ -272,7 +278,6 @@
   z-index: 10;
 }
 
-/* Remove height restriction when expanded */
 .channel-card-description.expanded .description-text {
   display: block;
   -webkit-line-clamp: unset;
@@ -284,7 +289,6 @@
   display: none;
 }
 
-/* Description text styling */
 .channel-card-description .description-text {
   font-family: 'Fixel Text', sans-serif;
   font-size: 16px;
@@ -320,7 +324,6 @@
   background: #F5F5F5;
 }
 
-/* Recommended Videos Section */
 .recommended-section {
   padding: 24px 8px 16px;
   display: flex;
@@ -395,7 +398,6 @@
   text-overflow: ellipsis;
 }
 
-/* Rating Section */
 .rating-section {
   display: flex;
   flex-direction: column;
@@ -441,7 +443,6 @@
   transform: scale(0.95);
 }
 
-/* Comments Section */
 .comments-section {
   padding: 24px 8px 16px;
   display: flex;
@@ -690,7 +691,6 @@
   text-decoration: underline;
 }
 
-/* Similar Channels Section */
 .similar-section {
   padding: 24px 0 16px;
   display: flex;
@@ -909,7 +909,6 @@
   border: 1px solid #6CB1F0;
 }
 
-/* Responsive */
 @media (min-width: 768px) {
   .channel-content {
     max-width: 720px;

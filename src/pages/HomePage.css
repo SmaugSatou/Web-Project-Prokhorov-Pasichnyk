@@ -21,7 +21,6 @@
   padding: 0;
 }
 
-/* Helper Bubble */
 .helper-bubble {
   position: fixed;
   bottom: 32px;
@@ -62,7 +61,6 @@
   transform: scale(1.05);
 }
 
-/* Saved Section */
 .saved-section {
   background: var(--blue-50);
   padding: 24px 16px;
@@ -106,7 +104,6 @@
   color: var(--blue-900);
 }
 
-/* Section */
 .section {
   padding: 24px 8px;
   border-radius: 12px;
@@ -135,7 +132,6 @@
   color: var(--blue-600);
 }
 
-/* Categories */
 .categories-grid {
   display: flex;
   flex-wrap: wrap;
@@ -170,7 +166,6 @@
   transform: translateY(-2px);
 }
 
-/* Channels Section */
 .channels-section {
   padding-top: 24px;
 }
@@ -227,7 +222,6 @@
   }
 }
 
-/* Add Channel Section */
 .add-channel-section {
   padding: 32px;
   background: var(--white);
@@ -273,7 +267,6 @@
   background: var(--blue-400);
 }
 
-/* Saved Section */
 .saved-section {
   background: var(--blue-50);
   padding: 24px 32px;
@@ -286,15 +279,10 @@
   cursor: pointer;
 }
 
-/* Section */
 .section {
   padding: 32px;
   border-radius: 12px;
   background: var(--white);
-}
-
-@media (max-width: 1024px) {
-  /* Already handled in mobile-first approach */
 }
 
 @media (max-width: 768px) {
