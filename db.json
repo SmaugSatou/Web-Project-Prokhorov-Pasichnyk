@@ -217,7 +217,7 @@
       "verified": true
     },
     {
-      "id": "12",
+      "id": "13",
       "name": "Музичний Майстер",
       "category": "Музика",
       "subscribers": "523 тис.",
@@ -235,7 +235,7 @@
       "verified": true
     },
     {
-      "id": "13",
+      "id": "14",
       "name": "Авто Огляд UA",
       "category": "Автомобілі",
       "subscribers": "398 тис.",
@@ -253,7 +253,7 @@
       "verified": true
     },
     {
-      "id": "14",
+      "id": "15",
       "name": "Психологія для всіх",
       "category": "Освіта",
       "subscribers": "234 тис.",
@@ -271,7 +271,7 @@
       "verified": true
     },
     {
-      "id": "15",
+      "id": "16",
       "name": "Історичний Фронт",
       "category": "Освіта",
       "subscribers": "412 тис.",
@@ -289,7 +289,7 @@
       "verified": true
     },
     {
-      "id": "16",
+      "id": "17",
       "name": "Дизайн Простір",
       "category": "Дизайн та творчість",
       "subscribers": "178 тис.",
@@ -307,7 +307,7 @@
       "verified": false
     },
     {
-      "id": "17",
+      "id": "18",
       "name": "Бізнес по-українськи",
       "category": "Бізнес",
       "subscribers": "267 тис.",
@@ -325,7 +325,7 @@
       "verified": true
     },
     {
-      "id": "18",
+      "id": "19",
       "name": "Природа України",
       "category": "Природа та екологія",
       "subscribers": "145 тис.",
@@ -343,7 +343,7 @@
       "verified": false
     },
     {
-      "id": "19",
+      "id": "20",
       "name": "Програмування для початківців",
       "category": "Технології",
       "subscribers": "321 тис.",
@@ -361,7 +361,7 @@
       "verified": true
     },
     {
-      "id": "20",
+      "id": "21",
       "name": "Модний Дайджест",
       "category": "Мода та стиль",
       "subscribers": "256 тис.",
