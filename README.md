@@ -1,5 +1,9 @@
 # U2U - Ukrainian YouTube Channels Platform
 
+![Site preview](assets/docs/site_screenshot.png)
+
+Website made as project for web technology course.
+
 U2U is a web platform for finding Ukrainian-language YouTube channels. The project has a catalog of Ukrainian content creators sorted by categories.
 
 ## What is done
