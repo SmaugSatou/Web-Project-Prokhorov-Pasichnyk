@@ -12,7 +12,7 @@ function ChannelsListPage() {
   const categoryParam = searchParams.get('category')
 
   const [channels, setChannels] = useState([])
-  const [allChannels, setAllChannels] = useState([])
+  const [totalChannels, setTotalChannels] = useState(0)
   const [activeSort, setActiveSort] = useState('subscribers')
   const [sortDirection, setSortDirection] = useState('desc')
   const [searchQuery, setSearchQuery] = useState('')
@@ -23,73 +23,47 @@ function ChannelsListPage() {
 
   useEffect(() => {
     fetchChannels()
-  }, [])
-
-  useEffect(() => {
-    filterAndSortChannels()
-  }, [allChannels, activeSort, sortDirection, searchQuery, categoryParam])
+  }, [activeSort, sortDirection, searchQuery, categoryParam, currentPage])
 
   const fetchChannels = async () => {
     try {
-      const response = await fetch('http://localhost:3000/channels')
+      const params = new URLSearchParams()
+
+
+      params.append('_page', currentPage)
+      params.append('_limit', itemsPerPage)
+
+      if (searchQuery) {
+        params.append('q', searchQuery)
+      }
+
+      if (categoryParam) {
+        params.append('category_like', categoryParam)
+      }
+
+      const sortFieldMap = {
+        'subscribers': 'subscribers',
+        'videos': 'videos',
+        'rating': 'rating'
+      }
+
+      params.append('_sort', sortFieldMap[activeSort])
+      params.append('_order', sortDirection)
+
+      const response = await fetch(`http://localhost:3000/channels?${params.toString()}`)
+
+      const totalCount = response.headers.get('X-Total-Count')
+      if (totalCount) {
+        setTotalChannels(parseInt(totalCount))
+      }
+
       const data = await response.json()
-      setAllChannels(data)
+      setChannels(data)
     } catch (error) {
       console.error('Error fetching channels:', error)
-      setAllChannels([])
+      setChannels([])
+      setTotalChannels(0)
     }
-  }
-
-  const filterAndSortChannels = () => {
-    let filtered = [...allChannels]
-
-    if (categoryParam) {
-      filtered = filtered.filter(channel => {
-        if (!channel.category) return false
-        const categories = channel.category.split(',').map(cat => cat.trim())
-        return categories.some(cat =>
-          cat.toLowerCase() === categoryParam.toLowerCase()
-        )
-      })
-    }
-
-    if (searchQuery) {
-      filtered = filtered.filter(channel =>
-        channel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (channel.category && channel.category.toLowerCase().includes(searchQuery.toLowerCase()))
-      )
-    }
-
-    if (activeSort === 'subscribers') {
-      filtered.sort((a, b) => {
-        // Extract number and handle "тис." (thousands), "млн" (millions)
-        const parseSubscribers = (str) => {
-          if (!str) return 0
-          const numStr = str.replace(/[^0-9.,]/g, '').replace(',', '.')
-          const num = parseFloat(numStr) || 0
-          if (str.includes('млн')) return num * 1000000
-          if (str.includes('тис')) return num * 1000
-          return num
-        }
-        const aNum = parseSubscribers(a.subscribers)
-        const bNum = parseSubscribers(b.subscribers)
-        return sortDirection === 'desc' ? bNum - aNum : aNum - bNum
-      })
-    } else if (activeSort === 'videos') {
-      filtered.sort((a, b) => {
-        const aNum = parseInt(a.videos?.toString().replace(/[^0-9]/g, '') || '0')
-        const bNum = parseInt(b.videos?.toString().replace(/[^0-9]/g, '') || '0')
-        return sortDirection === 'desc' ? bNum - aNum : aNum - bNum
-      })
-    } else if (activeSort === 'rating') {
-      filtered.sort((a, b) => {
-        const aRating = parseFloat(a.rating) || 0
-        const bRating = parseFloat(b.rating) || 0
-        return sortDirection === 'desc' ? bRating - aRating : aRating - bRating
-      })
-    }
-
-    setChannels(filtered)
   }
 
   const handleSortClick = (sortType) => {
@@ -99,15 +73,14 @@ function ChannelsListPage() {
       setActiveSort(sortType)
       setSortDirection('desc')
     }
+    setCurrentPage(1)
   }
 
-  const totalPages = Math.ceil(channels.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const paginatedChannels = channels.slice(startIndex, startIndex + itemsPerPage)
+  const totalPages = Math.ceil(totalChannels / itemsPerPage)
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchQuery, categoryParam, activeSort])
+  }, [searchQuery, categoryParam])
 
   return (
     <div className="channels-list-page">
@@ -175,7 +148,7 @@ function ChannelsListPage() {
         </div>
 
         <div className="channels-grid">
-          {paginatedChannels.map((channel) => (
+          {channels.map((channel) => (
             <ChannelCard
               key={channel.id}
               channel={channel}

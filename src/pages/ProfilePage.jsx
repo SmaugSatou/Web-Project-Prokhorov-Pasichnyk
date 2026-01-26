@@ -68,23 +68,38 @@ function ProfilePage() {
   }
 
   const fetchUserChannels = async () => {
-    setUserChannels([
-      {
-        id: 1,
-        name: 'Melior Max',
-        handle: '@meliormax',
-        subscribers: '45,1 тис.',
-        videos: '957',
-        rating: 4.8,
-        avatar: 'https://via.placeholder.com/60',
-        status: 'approved',
-        description: 'Привіт мене звати Макс і я роблю летсплей українською на моєму каналі.'
-      }
-    ])
+    try {
+      const response = await fetch('http://localhost:3000/user-channels')
+      const data = await response.json()
+      setUserChannels(data)
+    } catch (error) {
+      console.error('Error fetching user channels:', error)
+      setUserChannels([
+        {
+          id: 1,
+          name: 'Melior Max',
+          handle: '@meliormax',
+          subscribers: '45,1 тис.',
+          videos: '957',
+          rating: 4.8,
+          avatar: 'https://via.placeholder.com/60',
+          status: 'approved',
+          description: 'Привіт мене звати Макс і я роблю летсплей українською на моєму каналі.'
+        }
+      ])
+    }
   }
 
-  const handleRemoveChannel = (channelId) => {
-    setSavedChannels(savedChannels.filter(ch => ch.id !== channelId))
+  const handleRemoveChannel = async (channelId) => {
+    try {
+      await fetch(`http://localhost:3000/saved-channels/${channelId}`, {
+        method: 'DELETE'
+      })
+      setSavedChannels(savedChannels.filter(ch => ch.id !== channelId))
+    } catch (error) {
+      console.error('Error removing saved channel:', error)
+      setSavedChannels(savedChannels.filter(ch => ch.id !== channelId))
+    }
   }
 
   const handleChannelClick = (channelId) => {

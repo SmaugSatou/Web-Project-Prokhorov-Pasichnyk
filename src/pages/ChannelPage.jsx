@@ -29,6 +29,7 @@ function ChannelPage() {
     fetchChannelDetails()
     fetchSimilarChannels()
     fetchComments()
+    checkIfSaved()
   }, [id])
 
   useEffect(() => {
@@ -81,32 +82,110 @@ function ChannelPage() {
     }
   }
 
-  const toggleSave = () => {
-    setIsSaved(!isSaved)
+  const checkIfSaved = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/saved-channels/${id}`)
+      setIsSaved(response.ok)
+    } catch (error) {
+      setIsSaved(false)
+    }
+  }
+
+  const toggleSave = async () => {
+    if (isSaved) {
+      try {
+        await fetch(`http://localhost:3000/saved-channels/${id}`, {
+          method: 'DELETE'
+        })
+        setIsSaved(false)
+      } catch (error) {
+        console.error('Error removing saved channel:', error)
+      }
+    } else {
+      try {
+        const savedChannel = {
+          id: channel.id,
+          name: channel.name,
+          category: channel.category,
+          subscribers: channel.subscribers,
+          videos: channel.videos,
+          rating: channel.rating,
+          avatar: channel.avatar
+        }
+
+        await fetch('http://localhost:3000/saved-channels', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(savedChannel),
+        })
+        setIsSaved(true)
+      } catch (error) {
+        console.error('Error saving channel:', error)
+      }
+    }
   }
 
   const handleRating = (rating) => {
     setUserRating(rating)
   }
 
-  const handleCommentSubmit = () => {
+  const handleCommentSubmit = async () => {
     if (!commentText.trim()) return
 
     const newComment = {
-      id: comments.length + 1,
+      channelId: id,
       author: 'Ви',
-      date: 'Щойно',
-      rating: 5,
+      date: new Date().toISOString(),
+      rating: userRating || 5,
       text: commentText,
       avatar: 'https://via.placeholder.com/32'
     }
 
-    setComments([newComment, ...comments])
-    setCommentText('')
+    try {
+      const response = await fetch('http://localhost:3000/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newComment),
+      })
+
+      if (response.ok) {
+        const savedComment = await response.json()
+        setComments([savedComment, ...comments])
+        setCommentText('')
+      } else {
+        console.error('Failed to save comment')
+      }
+    } catch (error) {
+      console.error('Error saving comment:', error)
+    }
   }
 
   const toggleDescriptionExpand = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded)
+  }
+
+  const formatCommentDate = (dateString) => {
+    const now = new Date()
+    const commentDate = new Date(dateString)
+    const diffMs = now - commentDate
+    const diffMins = Math.floor(diffMs / 60000)
+    const diffHours = Math.floor(diffMs / 3600000)
+    const diffDays = Math.floor(diffMs / 86400000)
+
+    if (diffMins < 1) return 'Щойно'
+    if (diffMins < 60) return `${diffMins} хв тому`
+    if (diffHours < 24) return `${diffHours} год тому`
+    if (diffDays < 7) return `${diffDays} дн тому`
+
+    return commentDate.toLocaleDateString('uk-UA', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    })
   }
 
   if (isLoading) {
@@ -308,7 +387,7 @@ function ChannelPage() {
                     <div className="comment-bubble-content">
                       <div className="comment-meta">
                         <span className="comment-author">{comment.author}</span>
-                        <span className="comment-date">{comment.date}</span>
+                        <span className="comment-date">{formatCommentDate(comment.date)}</span>
                         <div className="comment-rating-stars">
                           {Array.from({ length: comment.rating }).map((_, i) => (
                             <svg key={i} width="20" height="20" viewBox="0 0 20 20" fill="#FBB03B">

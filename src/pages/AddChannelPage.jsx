@@ -30,18 +30,28 @@ function AddChannelPage() {
     setSubmitStatus(null)
 
     try {
-      const response = await fetch('http://localhost:3000/channels', {
+      const channelData = {
+        name: formData.channelName,
+        youtubeUrl: formData.channelUrl,
+        category: formData.category,
+        description: formData.description,
+        email: formData.email,
+        status: 'moderation',
+        submittedAt: new Date().toISOString()
+      }
+
+      const response = await fetch('http://localhost:3000/user-channels', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(channelData)
       })
 
       if (response.ok) {
         setSubmitStatus('success')
         setTimeout(() => {
-          navigate('/')
+          navigate('/profile')
         }, 2000)
       } else {
         setSubmitStatus('error')
@@ -161,13 +171,13 @@ function AddChannelPage() {
 
             {submitStatus === 'success' && (
               <div className="status-message success">
-                ✓ Канал успішно додано! Перенаправлення...
+                Канал успішно додано! Перенаправлення...
               </div>
             )}
 
             {submitStatus === 'error' && (
               <div className="status-message error">
-                ✗ Помилка при додаванні каналу. Спробуйте ще раз.
+                Помилка при додаванні каналу. Спробуйте ще раз.
               </div>
             )}
 

@@ -223,7 +223,6 @@
 }
 
 .add-channel-section {
-  padding: 32px;
   background: var(--white);
   border-radius: 12px;
 }
@@ -295,10 +294,6 @@
   }
 
   .section {
-    padding: 24px 16px;
-  }
-
-  .add-channel-section {
     padding: 24px 16px;
   }
 }
