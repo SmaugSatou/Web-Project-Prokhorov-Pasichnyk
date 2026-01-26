@@ -8,7 +8,7 @@
 .channel-content {
   flex: 1;
   width: 100%;
-  max-width: 360px;
+  max-width: 90%;
   margin: 0 auto;
   padding: 24px 0;
   display: flex;
@@ -155,8 +155,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: calc(100% - 24px);
-  max-width: 328px;
+  width: 100%;
   height: 40px;
   background: #CF2A1E;
   border-radius: 10px;
@@ -503,6 +502,10 @@
   border-radius: 39px;
   overflow: hidden;
   flex-shrink: 0;
+  background-color: #e8eef3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .comment-user-avatar img {
@@ -587,9 +590,13 @@
 .comment-avatar {
   width: 32px;
   height: 32px;
-  border-radius: 39px;
+  border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
+  background-color: #e8eef3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .comment-avatar img {
@@ -606,22 +613,14 @@
 }
 
 .comment-bubble-arrow {
-  width: 6px;
-  height: 32px;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.comment-bubble-arrow::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
   width: 0;
   height: 0;
-  border-right: 6px solid #D4E7FA;
-  border-top: 16px solid transparent;
-  border-bottom: 16px solid transparent;
+  border-right: 8px solid #D4E7FA;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  align-self: flex-start;
+  margin-top: 8px;
+  flex-shrink: 0;
 }
 
 .comment-bubble-content {
@@ -751,7 +750,7 @@
 
 .similar-scroll-container {
   display: flex;
-  gap: 8px;
+  gap: 0;
   transition: transform 0.3s ease;
   overflow: visible;
   width: 100%;
@@ -760,6 +759,8 @@
 .similar-channel-card {
   flex-shrink: 0;
   width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
   background: #FFFFFF;
   border: 4px solid #D4E7FA;
   border-radius: 10px;
@@ -951,7 +952,6 @@
   }
 
   .channel-youtube-button {
-    max-width: 400px;
     height: 48px;
     font-size: 18px;
     margin-top: 16px;
@@ -1051,10 +1051,6 @@
     padding: 32px 0 24px;
   }
 
-  .similar-scroll-container {
-    gap: 12px;
-  }
-
   .similar-channel-card {
     min-height: 280px;
   }
@@ -1102,7 +1098,6 @@
   }
 
   .channel-youtube-button {
-    max-width: 500px;
     height: 52px;
     font-size: 20px;
     margin-top: 20px;
@@ -1227,14 +1222,10 @@
   }
 
   .comment-bubble-arrow {
-    width: 8px;
-    height: 40px;
-  }
-
-  .comment-bubble-arrow::before {
-    border-right: 8px solid #D4E7FA;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
+    border-right: 10px solid #D4E7FA;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-top: 10px;
   }
 
   .comment-bubble-content {
@@ -1260,10 +1251,6 @@
 
   .similar-section {
     padding: 40px 0 32px;
-  }
-
-  .similar-scroll-container {
-    gap: 16px;
   }
 
   .similar-channel-card {
@@ -1302,32 +1289,5 @@
 
   .view-info-link {
     font-size: 17px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .channel-content {
-    max-width: 1200px;
-    padding: 48px 40px;
-    gap: 64px;
-  }
-
-  .main-channel-card {
-    min-height: 600px;
-  }
-
-  .video-scroll-container {
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-  }
-
-  .similar-scroll-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .carousel-dots {
-    display: none;
   }
 }

@@ -140,7 +140,7 @@ function ChannelPage() {
       date: new Date().toISOString(),
       rating: userRating || 5,
       text: commentText,
-      avatar: 'https://via.placeholder.com/32'
+      avatar: '/assets/profile_icons/my.png'
     }
 
     try {
@@ -354,7 +354,7 @@ function ChannelPage() {
             <div className="comment-input-container">
               <div className="comment-input-wrapper">
                 <div className="comment-user-avatar">
-                  <img src="https://via.placeholder.com/32" alt="User" />
+                  <img src="/assets/profile_icons/my.png" alt="User" onError={handleImageError} />
                 </div>
                 <div className="comment-input-field">
                   <textarea
@@ -432,7 +432,7 @@ function ChannelPage() {
                 </button>
               )}
               <div className="similar-scroll-wrapper">
-                <div className="similar-scroll-container" style={{ transform: `translateX(calc(-${currentSlide} * (100% + 8px)))` }}>
+                <div className="similar-scroll-container" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                 {similarChannels.map(similarChannel => (
                   <div
                     key={similarChannel.id}
